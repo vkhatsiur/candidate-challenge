@@ -36,7 +36,13 @@ return [
             'serve' => true,
             'throw' => false,
         ],
-
+        'categories' => [
+            'driver' => 'local',
+            'root' => storage_path('app/categories'),
+            'url' => env('APP_URL').'/categories',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -72,6 +78,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('categories') => storage_path('app/categories')
     ],
 
 ];
