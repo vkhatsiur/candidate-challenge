@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\CommandBus\CommandBus;
+use App\CommandBus\ICommandBus;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(ICommandBus::class, function () {
+            return new CommandBus();
+        });
     }
 
     /**
