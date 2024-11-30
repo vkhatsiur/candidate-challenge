@@ -6,7 +6,7 @@ use App\CommandBus\ICommandBus;
 use App\Queries\GetCategoriesListQuery;
 use Livewire\Component;
 
-class Search extends Component
+class SearchBar extends Component
 {
     public $search = '';
     public $searchResults = [];
@@ -19,6 +19,6 @@ class Search extends Component
 
     public function render()
     {
-        return view('livewire.search');
+        return view('livewire.search-bar');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Livewire\Search;
+use App\Livewire\SearchBar;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -13,7 +13,7 @@ class SearchTest extends TestCase
     /** @test */
     public function renders_successfully()
     {
-        Livewire::test(Search::class)
+        Livewire::test(SearchBar::class)
             ->assertStatus(200);
     }
 }
