@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Listing;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,5 +30,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Cars', 'slug' => 'cars', 'logo' => 'cars.png', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Property', 'slug' => 'property', 'logo' => 'property.png', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
         ]);
+
+        Listing::factory(30)->create();
     }
 }

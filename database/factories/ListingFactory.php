@@ -1,0 +1,32 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Category;
+use App\Models\Listing;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+
+class ListingFactory extends Factory
+{
+    protected $model = Listing::class;
+
+    public function definition(): array
+    {
+        return [
+            'title' => $this->faker->unique()->words(5, true),
+            'slug' => $this->faker->slug(),
+            'status' => $this->faker->randomNumber(),
+            'description' => $this->faker->text(),
+            'published_at' => Carbon::now(),
+            'price' => $this->faker->randomNumber(),
+            'currency' => $this->faker->word(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+
+            'user_id' => User::factory(),
+            'category_id' => Category::query()->inRandomOrder()->value('id'),
+        ];
+    }
+}

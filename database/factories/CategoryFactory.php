@@ -15,6 +15,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'slug' => $this->faker->slug(),
+            'logo' => $this->faker->randomElement(['cars.png', 'electronics.png', 'furniture.png', 'property.png']),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
