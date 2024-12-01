@@ -19,7 +19,7 @@ class CommandBus implements ICommandBus
         try {
             return $handler->handle($request);
         } catch (\Exception $exception) {
-            throw new HandlerProcessingException('Cannot to process the ' . get_class($request));
+            throw new HandlerProcessingException('Cannot to process the ' . get_class($request), previous: $exception);
         }
     }
 }
