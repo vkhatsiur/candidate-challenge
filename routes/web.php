@@ -4,6 +4,7 @@ use App\CommandBus\ICommandBus;
 use App\Models\Listing;
 use App\Queries\GetCategoriesListQuery;
 use App\Queries\GetTopListingsQuery;
+use App\Queries\SearchListingQuery;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ Route::get('/', function (ICommandBus $bus) {
 })->name('home');
 
 Route::get('/search', function (Request $request, ICommandBus $bus) {
+    $query = $request->query('query');
     $category = $request->query('category');
-    return view('search', ['listings' => $bus->send(new GetTopListingsQuery())]);
+    return view('search', ['listings' => $bus->send(SearchListingQuery::create($query, $category))]);
 })->name('search');
 
 Route::get('/{listing:slug}', function (Request $request, Listing $listing) {

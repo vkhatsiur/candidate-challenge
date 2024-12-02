@@ -20,7 +20,7 @@ class GetCategoriesListQueryHandler implements IQueryHandler
     public function handle(GetCategoriesListQuery $query) : Collection
     {
         return Category::all()->map(function ($category) {
-            return CategoryDto::create($category->name,Storage::disk('categories')->url($category->logo));
+            return CategoryDto::create($category->name,Storage::disk('categories')->url($category->logo), $category->slug);
         });
     }
 }

@@ -3,18 +3,27 @@
 namespace App\Livewire;
 
 use App\CommandBus\ICommandBus;
-use App\Queries\GetCategoriesListQuery;
+use App\Queries\GetSearchHintsQuery;
 use Livewire\Component;
 
 class SearchBar extends Component
 {
-    public $search = '';
-    public $searchResults = [];
+    public $query = '';
+    public $results = [];
 
-    public function openSearchResults()
+    public function openHints()
     {
+        if ($this->query === '') {
+            return;
+        }
+
         $bus = app(ICommandBus::class);
-        $this->searchResults = $bus->send(new GetCategoriesListQuery());
+        $this->results = $bus->send(GetSearchHintsQuery::create($this->query));
+    }
+
+    public function updatedQuery()
+    {
+        $this->openHints();
     }
 
     public function render()
