@@ -21,7 +21,7 @@ class ListingFactory extends Factory
             'description' => $this->faker->text(),
             'published_at' => Carbon::now(),
             'price' => $this->faker->randomNumber(),
-            'currency' => $this->faker->word(),
+            'currency' => $this->faker->randomElement(['USD', 'EUR']),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\CommandBus\ICommandBus;
+use App\Models\Listing;
 use App\Queries\GetCategoriesListQuery;
 use App\Queries\GetTopListingsQuery;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,7 @@ Route::get('/search', function (Request $request) {
     $category = $request->query('category');
     return view('search');
 })->name('search');
+
+Route::get('/{listing:slug}', function (Request $request, Listing $listing) {
+    return view('listing', ['listing' => $listing]);
+})->name('listing');
