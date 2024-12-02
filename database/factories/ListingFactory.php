@@ -18,8 +18,9 @@ class ListingFactory extends Factory
             'title' => $this->faker->unique()->words(5, true),
             'slug' => $this->faker->slug(),
             'status' => $this->faker->randomNumber(),
-            'description' => $this->faker->text(),
+            'description' => $this->faker->text(800),
             'published_at' => Carbon::now(),
+            'image' => $this->faker->imageUrl(),
             'price' => $this->faker->randomNumber(),
             'currency' => $this->faker->randomElement(['USD', 'EUR']),
             'created_at' => Carbon::now(),
@@ -28,5 +29,13 @@ class ListingFactory extends Factory
             'user_id' => User::factory(),
             'category_id' => Category::query()->inRandomOrder()->value('id'),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Listing $listing) {
+            $listing->image = "https://picsum.photos/seed/{$listing->id}/640/320";
+            $listing->save();
+        });
     }
 }

@@ -14,9 +14,9 @@ Route::get('/', function (ICommandBus $bus) {
     ]);
 })->name('home');
 
-Route::get('/search', function (Request $request) {
+Route::get('/search', function (Request $request, ICommandBus $bus) {
     $category = $request->query('category');
-    return view('search');
+    return view('search', ['listings' => $bus->send(new GetTopListingsQuery())]);
 })->name('search');
 
 Route::get('/{listing:slug}', function (Request $request, Listing $listing) {

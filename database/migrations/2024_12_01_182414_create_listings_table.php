@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->integer('status');
             $table->text('description')->nullable();
             $table->dateTime('published_at')->nullable();
+            $table->string('image');
             $table->integer('price');
             $table->string('currency');
             $table->foreignId('user_id');
