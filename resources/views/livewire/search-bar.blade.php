@@ -10,8 +10,7 @@
                 placeholder="Search Listing"
                 @input="open = $event.target.value.length > 0"
                 @focus="open = $wire.query.length > 0"/>
-            <button class="bg-purple-800 rounded-r p-2 text-sm hover:bg-purple-700 active:bg-purple-600"
-                    type="submit">Search</button>
+            <x-forms.button class="text-sm rounded-r">Search</x-forms.button>
         </div>
     </form>
     <div class="relative text-black"
@@ -19,9 +18,11 @@
         <div class="absolute w-9/12 border-2 bg-white border-gray-900 mt-1">
             <div class="flex flex-col space-y-1 p-2">
                 @forelse($results as $item)
-                    <div class="hover:bg-gray-300">
-                        {{ $item->title }}
-                    </div>
+                    <a href="{{ route('listing', ['listing'=> $item]) }}">
+                        <div class="hover:bg-gray-300">
+                            {{ $item->title }}
+                        </div>
+                    </a>
                 @empty
                     <p>
                         No results

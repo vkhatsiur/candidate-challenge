@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\CommandBus\CommandBus;
 use App\CommandBus\ICommandBus;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Money\Currencies\ISOCurrencies;
@@ -27,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Model::unguard();
+
         Blade::stringable(function (Money $money) {
             $currencies = new ISOCurrencies();
             $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);

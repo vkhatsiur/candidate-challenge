@@ -1,6 +1,7 @@
 <?php
 
 use App\CommandBus\ICommandBus;
+use App\Livewire\CreateListing;
 use App\Models\Listing;
 use App\Queries\GetCategoriesListQuery;
 use App\Queries\GetTopListingsQuery;
@@ -22,5 +23,7 @@ Route::get('/search', function (Request $request, ICommandBus $bus) {
 })->name('search');
 
 Route::get('/{listing:slug}', function (Request $request, Listing $listing) {
-    return view('listing', ['listing' => $listing]);
+    return view('listings.index', ['listing' => $listing]);
 })->name('listing');
+
+Route::get('listings/create', CreateListing::class)->name('listings.create');
