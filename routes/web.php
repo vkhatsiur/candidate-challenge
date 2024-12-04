@@ -1,6 +1,7 @@
 <?php
 
 use App\CommandBus\ICommandBus;
+use App\Commands\DestroyListingCommand;
 use App\Commands\SignInCommand;
 use App\Commands\SignOutCommand;
 use App\Commands\SignUpCommand;
@@ -36,6 +37,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::delete('/sign-out', fn(ICommandBus $bus) => $bus->send(new SignOutCommand()))->name('sign-out');
     Route::get('/listings/create', CreateListing::class)->name('listings.create');
+    Route::delete('/listings/{listing:slug}', fn(ICommandBus $bus, Listing $listing) => $bus->send(new DestroyListingCommand($listing)))->name('destroy-listing');
 });
 
 Route::get('/{listing:slug}', fn(Request $request, Listing $listing) => view('listings.index', ['listing' => $listing]))->name('listing');

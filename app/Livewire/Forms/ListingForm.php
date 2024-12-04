@@ -25,7 +25,7 @@ class ListingForm extends Form
 
     public $currency = '';
 
-    public $user_id = 1;
+    public $user_id;
 
     public $category_id;
 
@@ -42,6 +42,7 @@ class ListingForm extends Form
     }
 
     private function save() {
+        $this->user_id = auth()->user()->id;
         $rules = ListingForm::getValidationRules($this->status);
         $this->validate($rules);
 
@@ -70,7 +71,7 @@ class ListingForm extends Form
         return  [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
-            'price' => 'required|numeric|min:0',
+            'price' => 'numeric|min:0',
             'currency' => 'required|string|size:3',
             'category_id' => 'required|integer|exists:categories,id',
             'user_id' => 'required|integer|exists:users,id',
@@ -80,7 +81,7 @@ class ListingForm extends Form
     private static function activeRules(): array
     {
         $activeRules = ListingForm::draftRules();
-        $activeRules['price'] = 'required|numeric';
+        $activeRules['price'] = 'required|numeric|min:0';
         return $activeRules;
     }
 }
