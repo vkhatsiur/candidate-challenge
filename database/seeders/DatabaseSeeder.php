@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Property', 'slug' => 'property', 'logo' => 'property.png', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
         ]);
 
-        Listing::factory(30)->create();
+        Listing::factory(100)->create();
     }
 }
