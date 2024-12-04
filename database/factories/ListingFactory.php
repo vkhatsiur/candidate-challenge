@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ListingStatus;
 use App\Models\Category;
 use App\Models\Listing;
 use App\Models\User;
@@ -17,7 +18,7 @@ class ListingFactory extends Factory
         return [
             'title' => $this->faker->unique()->words(5, true),
             'slug' => $this->faker->slug(),
-            'status' => $this->faker->randomNumber(),
+            'status' => $this->faker->randomElement(ListingStatus::cases())->value,
             'description' => $this->faker->text(800),
             'published_at' => Carbon::now(),
             'image' => $this->faker->imageUrl(),

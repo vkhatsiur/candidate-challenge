@@ -19,16 +19,20 @@ class CreateListing extends Component
     {
         $bus = app(ICommandBus::class);
         $this->categories = $bus->send(new GetCategoryNamesListQuery());
-        $this->form->category_id = $this->categories[0];
+        $this->form->category_id = $this->categories[0]['id'];
 
         $this->currencies = Currency::cases();
-        $this->form->currency = $this->currencies[0];
+        $this->form->currency = $this->currencies[0]->value;
     }
 
     public function save() {
         $this->form->store();
+        return redirect()->to(route('home'));
+    }
 
-        $this->redirect(route('home'), navigate: true);
+    public function publish() {
+        $this->form->publish();
+        return redirect()->to(route('home'));
     }
 
     public function render()

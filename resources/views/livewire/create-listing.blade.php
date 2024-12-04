@@ -1,12 +1,18 @@
 <div class="container mx-auto pt-16 w-5/12">
-    <x-forms.form wire:submit="save" class="space-y-8">
+    <x-forms.form class="space-y-8">
         <div>
             <x-forms.lable name="title" label="Title" />
             <x-forms.input wire:model="form.title" id="title" name="title" type="text" />
+            <div>
+                @error('form.title') <span class="text-red-600">{{ $message }}</span> @enderror
+            </div>
         </div>
         <div>
             <x-forms.lable name="description" label="Description" />
             <x-forms.textarea wire:model="form.description" id="description" name="description" type="text" class="h-24" />
+            <div>
+                @error('form.description') <span class="text-red-600">{{ $message }}</span> @enderror
+            </div>
         </div>
         <div>
             <x-forms.lable name="category" label="Category" />
@@ -23,6 +29,9 @@
                 <div class="w-full">
                     <x-forms.lable name="price" label="Price" />
                     <x-forms.input wire:model="form.price" id="price" name="price" type="number" />
+                    <div>
+                        @error('form.price') <span class="text-red-600">{{ $message }}</span> @enderror
+                    </div>
                 </div>
                 <div>
                     <x-forms.lable name="currency" label="Currency" />
@@ -36,8 +45,9 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end">
-            <x-forms.button class="text-sm text-white px-4" type="submit">Save</x-forms.button>
+        <div class="flex justify-end space-x-2 text-white text-sm">
+            <x-forms.button class="px-4" type="button" wire:click="save">Save</x-forms.button>
+            <x-forms.button class="px-4" type="button" wire:click="publish">Publish</x-forms.button>
         </div>
     </x-forms.form>
 </div>
