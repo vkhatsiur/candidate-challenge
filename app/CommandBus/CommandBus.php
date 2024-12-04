@@ -4,6 +4,7 @@ namespace App\CommandBus;
 
 use App\CommandBus\Exceptions\HandlerNotFoundException;
 use App\CommandBus\Exceptions\HandlerProcessingException;
+use Illuminate\Validation\ValidationException;
 
 class CommandBus implements ICommandBus
 {
@@ -18,7 +19,11 @@ class CommandBus implements ICommandBus
         $handler = app($handlerClass);
         try {
             return $handler->handle($request);
-        } catch (\Exception $exception) {
+        } catch (ValidationException $ex)
+        {
+            throw $ex;
+        }
+        catch (\Exception $exception) {
             throw new HandlerProcessingException('Cannot to process the ' . get_class($request), previous: $exception);
         }
     }

@@ -1,4 +1,4 @@
-<div class="container mx-auto pt-16 w-5/12">
+<div class="container mx-auto pt-16 w-8/12 md:w-6/12">
     <x-forms.form class="space-y-8">
         <div>
             <x-forms.lable name="title" label="Title" />
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end space-x-2 text-white text-sm">
+        <div class="flex justify-end space-x-2 text-sm">
             <x-forms.button class="px-4" type="button" wire:click="save">Save</x-forms.button>
             <x-forms.button class="px-4" type="button" wire:click="publish">Publish</x-forms.button>
         </div>

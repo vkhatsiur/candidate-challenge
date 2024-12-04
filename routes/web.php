@@ -1,6 +1,9 @@
 <?php
 
 use App\CommandBus\ICommandBus;
+use App\Commands\SignInCommand;
+use App\Commands\SignOutCommand;
+use App\Commands\SignUpCommand;
 use App\Livewire\CreateListing;
 use App\Models\Listing;
 use App\Queries\GetCategoriesListQuery;
@@ -22,8 +25,19 @@ Route::get('/search', function (Request $request, ICommandBus $bus) {
     return view('search', ['listings' => $bus->send(SearchListingQuery::create($query, $category))]);
 })->name('search');
 
-Route::get('/{listing:slug}', function (Request $request, Listing $listing) {
-    return view('listings.index', ['listing' => $listing]);
-})->name('listing');
+Route::middleware('guest')->group(function () {
+    Route::get('/sign-in', fn() => view('auth.sign-in'))->name('login');
+    Route::post('/sign-in', fn(ICommandBus $bus) => $bus->send(new SignInCommand()))->name('store-sign-in');
 
-Route::get('listings/create', CreateListing::class)->name('listings.create');
+    Route::get('/sign-up', fn() => view('auth.sing-up'))->name('create-sign-up');
+    Route::post('/sign-up', fn(ICommandBus $bus) => $bus->send(new SignUpCommand()))->name('store-sign-up');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::delete('/sign-out', fn(ICommandBus $bus) => $bus->send(new SignOutCommand()))->name('sign-out');
+    Route::get('/listings/create', CreateListing::class)->name('listings.create');
+});
+
+Route::get('/{listing:slug}', fn(Request $request, Listing $listing) => view('listings.index', ['listing' => $listing]))->name('listing');
+
+
