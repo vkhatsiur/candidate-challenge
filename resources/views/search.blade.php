@@ -7,5 +7,8 @@
                 <x-listing-card :listing="$listing" class="block sm:hidden" />
             @endforeach
         </div>
+        <div class="p-4">
+            {{ $listings->links() }}
+        </div>
     </div>
 </x-layouts.app>

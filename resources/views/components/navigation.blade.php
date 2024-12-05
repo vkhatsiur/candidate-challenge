@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="flex-auto py-5 pl-5">
-            @livewire('search-bar', ['query' => request()->query('query')])
+            @livewire('search-bar')
         </div>
         <div class="flex-none justify-self-center p-5">
             <div class="flex space-x-4">

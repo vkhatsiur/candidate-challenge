@@ -4,10 +4,12 @@ namespace App\Livewire;
 
 use App\CommandBus\ICommandBus;
 use App\Queries\GetSearchHintsQuery;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class SearchBar extends Component
 {
+    #[Url(except: '')]
     public $query = '';
     public $results = [];
 
