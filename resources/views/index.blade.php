@@ -11,13 +11,15 @@
         </div>
     </div>
 
-    <div class="px-6 pt-6">
-        <p class="text-2xl font-semibold pl-4">Top Listings</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-            @foreach($topListings as $topListing)
-                <x-listing-card :listing="$topListing" />
-            @endforeach
+    @if(!$topListings->isEmpty())
+        <div class="px-6 pt-6">
+            <p class="text-2xl font-semibold pl-4">Top Listings</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                @foreach($topListings as $topListing)
+                    <x-listing-card :listing="$topListing" />
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 
 </x-layouts.app>
