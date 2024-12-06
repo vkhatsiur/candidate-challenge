@@ -2,13 +2,22 @@
 
 namespace App\Queries;
 
-use App\CommandBus\IQuery;
+use App\CommandBus\ICacheableQuery;
 use App\CommandBus\IQueryHandler;
 use App\Models\Category;
 
-class GetCategoryNamesListQuery implements IQuery
+class GetCategoryNamesListQuery implements ICacheableQuery
 {
 
+    public function getCacheTtl(): int
+    {
+        return 60;
+    }
+
+    public function getCacheKey(): string
+    {
+        return "category_names";
+    }
 }
 
 class GetCategoryNamesListQueryHandler implements IQueryHandler
