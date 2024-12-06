@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Livewire;
 
 use App\Enums\Currency;
 use App\Enums\ListingStatus;
@@ -8,7 +8,7 @@ use App\Livewire\CreateListing;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Livewire\Livewire;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CreateListingTest extends TestCase
