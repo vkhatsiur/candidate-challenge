@@ -27,3 +27,19 @@ composer install
 php artisan migrate
 php artisan db:seed
 ```
+
+## Testing
+
+### 1. Set up the database
+
+```bash
+php artisan migrate --database=sqlite_testing
+php artisan db:seed --class=TestsSeeder --database=sqlite_testing
+```
+
+### 2. Set up the database
+
+Use your IDE or execute following command in root folder
+```bash
+php artisan test
+```

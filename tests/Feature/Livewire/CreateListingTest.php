@@ -8,18 +8,17 @@ use App\Livewire\CreateListing;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CreateListingTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @test */
+    #[Test]
     public function it_sets_default_values_on_mount()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->signIn();
 
         $categories = Category::all();
         $currencies = Currency::cases();
@@ -29,12 +28,10 @@ class CreateListingTest extends TestCase
             ->assertSet('form.currency', $currencies[0]->value);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_save_a_draft_listing()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
+        $user = $this->signIn();
         $category = Category::inRandomOrder()->first();
 
         Livewire::test(CreateListing::class)
@@ -57,12 +54,10 @@ class CreateListingTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_publish_a_listing()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
+        $user = $this->signIn();
         $category = Category::inRandomOrder()->first();
 
         Livewire::test(CreateListing::class)
@@ -84,5 +79,12 @@ class CreateListingTest extends TestCase
             'user_id' => $user->id,
             'published_at' => now(),
         ]);
+    }
+
+    private function signIn() : User
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        return $user;
     }
 }
